@@ -13,7 +13,6 @@ async function feedNotasContainer() {
   let notas = await getNotas()
   notas.forEach(nota => {
     const { titulo, corpo, id } = nota
-    console.log(id)
     cardHTML = gerarCard(titulo, corpo, id)
     notasContainer.innerHTML += cardHTML;
   });
@@ -24,17 +23,17 @@ function gerarCard(titulo, corpo, id) {
 <div class="card-body">
   <h5 class="card-title">${titulo}</h5>
   <p class="card-text">${corpo}.</p>
-  <a href=viewNota(${id}) class="btn btn-primary">Ver</a>
+  <a href=javascript:viewNota(${id}) class="btn btn-primary">Ver</a>
 </div>
 </div>`;
 }
 
-function gerarNotaView(titulo,corpo){
-  return `<h1>${titulo}</h1><h2>${corpo}</h2`
+function gerarNotaView(titulo, corpo) {
+  return `<h1>${titulo}</h1><h4>${corpo}</h4>`
 }
-async function viewNota(id){
-  let nota=await fetch(serverURL+"/"+id)
-  notasContainer.innerHTML=gerarNotaView(nota.titulo,nota.corpo)
+async function viewNota(id) {
+  let nota = await fetch(serverURL + "/" + id).then(dados=>dados.json())
+  notasContainer.innerHTML = gerarNotaView(nota.titulo, nota.corpo)
 }
 
 feedNotasContainer()
