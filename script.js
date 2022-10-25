@@ -1,16 +1,20 @@
 notasContainer = document.querySelector('.corpo')
-let serverURL = 'http://127.0.0.1:3333/notas'
+let serverURL = 'http://127.0.0.1:3333/api/notas'
 
 
 
 async function getNotas() {
-  const response = await fetch(serverURL);
+  const response = await fetch(serverURL,
+    {
+      headers: { Authorization: 'Bearer Mg.shOnLFN1r2gWo0rljwle-UIYbtOFjl_Bhc2tIIKDxvCBws8f4d9mJfK5yQtL' }
+    });
   const myJson = await response.json();
   return myJson
 }
 
 async function feedNotasContainer() {
   let notas = await getNotas()
+  console.log(notas)
   notas.forEach(nota => {
     const { titulo, corpo, id } = nota
     cardHTML = gerarCard(titulo, corpo, id)
@@ -32,7 +36,7 @@ function gerarNotaView(titulo, corpo) {
   return `<h1>${titulo}</h1><h4>${corpo}</h4>`
 }
 async function viewNota(id) {
-  let nota = await fetch(serverURL + "/" + id).then(dados=>dados.json())
+  let nota = await fetch(serverURL + "/" + id).then(dados => dados.json())
   notasContainer.innerHTML = gerarNotaView(nota.titulo, nota.corpo)
 }
 
