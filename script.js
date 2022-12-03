@@ -12,6 +12,12 @@ async function getNota(id) {
   return nota[0]
 }
 
+function getFormJSONData(form) {
+  const data = new FormData(form)
+  const value = Object.fromEntries(data.entries());
+  return value
+}
+
 async function getNotas() {
   const response = await fetch(serverURL,
     {
@@ -52,4 +58,5 @@ async function viewNota(id) {
 
 
 
-export { getNota , feedNotasContainer}
+export { getNota, feedNotasContainer, getFormJSONData }
+

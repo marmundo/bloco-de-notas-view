@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notas</title>
+    <title>Criar Nota</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,19 +27,25 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="titulo">
-        <p>Notas</p>
-      </div>
+      <div class="titulo"><p>Edição de Notas</p></div>
       <div class="mb-3">
-        <button class="btn btn-primary" onclick="location.href='criarNota.html'">
-          Criar Nota
+        <button class="btn btn-primary" onclick="location.href='.'">
+          Home
         </button>
       </div>
-      <div class="corpo mx-auto">
-        <ul id="notas" class="list-group"></ul>
-      </div>
+
+      <form id="form">
+        <div class="mb-3">
+          <label class="form-label" for="titulo">Titulo</label>
+          <input class="form-control" type="text" name="titulo" id="titulo" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="corpo">Corpo</label>
+          <input class="form-control" type="text" name="corpo" id="corpo" />
+        </div>
+        <button class="btn btn-primary" id="btnEditarNota">Salvar</button>
+      </form>
     </div>
-    <script type="module" src="script.js"></script>
-    <script type="module" src="index.js"></script>
+    <script type="module" src="criarNota.js"></script>
   </body>
 </html>

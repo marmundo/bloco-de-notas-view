@@ -1,4 +1,4 @@
-import { authToken, getNota, serverURL } from './script.js'
+import { authToken, getFormJSONData, getNota, serverURL } from './script.js'
 
 let formTitulo = document.querySelector('#titulo')
 let formCorpo = document.querySelector('#corpo')
@@ -21,11 +21,7 @@ function gerarFormNota(nota) {
   formCorpo.value = nota.corpo
 }
 
-function getFormJSONData(form) {
-  const data = new FormData(form)
-  const value = Object.fromEntries(data.entries());
-  return value
-}
+
 
 btnEditarNota.addEventListener("click", async (data) => {
   data.preventDefault()
@@ -33,11 +29,10 @@ btnEditarNota.addEventListener("click", async (data) => {
   let id = params.get('id')
   let url = `${serverURL}/${id}`
   const response = await fetch(url, {
-    headers: { Authorization: `${authToken}` , , 'Content-Type': 'application/json' },
+    headers: { Authorization: `${authToken}`, 'Content-Type': 'application/json' },
     method: 'PUT',
     body: JSON.stringify(data)
   })
-  console.log(await response.json())
   if (!response.ok) {
     console.log(response.json)
   } else {
