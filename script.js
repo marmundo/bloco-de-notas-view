@@ -1,12 +1,21 @@
-notasContainer = document.querySelector('.corpo')
-let serverURL = 'http://127.0.0.1:3333/api/notas'
+let notasContainer = document.querySelector('.corpo')
+export let serverURL = 'http://127.0.0.1:3333/api/notas'
+export let authToken = "Bearer NA.NE2DjYa4-jI_kJSI_kwP-K9k_L2p-VBYQzIasosCGvR1ZeuLlfff2atZp-yb"
 
 
+
+async function getNota(id) {
+  const response = await fetch(`${serverURL}/${id}`, {
+    headers: { Authorization: `${authToken}` }
+  })
+  let nota = await response.json()
+  return nota[0]
+}
 
 async function getNotas() {
   const response = await fetch(serverURL,
     {
-      headers: { Authorization: 'Bearer Mg.shOnLFN1r2gWo0rljwle-UIYbtOFjl_Bhc2tIIKDxvCBws8f4d9mJfK5yQtL' }
+      headers: { Authorization: `${authToken}` }
     });
   const myJson = await response.json();
   return myJson
@@ -14,20 +23,20 @@ async function getNotas() {
 
 async function feedNotasContainer() {
   let notas = await getNotas()
-  console.log(notas)
   notas.forEach(nota => {
-    const { titulo, corpo, id } = nota
-    cardHTML = gerarCard(titulo, corpo, id)
+    let cardHTML = gerarCard(nota)
     notasContainer.innerHTML += cardHTML;
   });
 }
 
-function gerarCard(titulo, corpo, id) {
+function gerarCard(nota) {
   return `<div class="card" style="width: 18rem;">
 <div class="card-body">
-  <h5 class="card-title">${titulo}</h5>
-  <p class="card-text">${corpo}.</p>
-  <a href=javascript:viewNota(${id}) class="btn btn-primary">Ver</a>
+  <h5 class="card-title">${nota.titulo}</h5>
+  <p class="card-text">${nota.corpo}.</p>
+  <a href=javascript:viewNota(${nota.id}) class="btn btn-primary">Ver</a>
+  <a href=editarNota.html?id=${nota.id} class="btn btn-primary">Editar</a>
+  <a href=javascript:viewNota(${nota.id}) class="btn btn-primary">Remover</a>
 </div>
 </div>`;
 }
@@ -35,9 +44,12 @@ function gerarCard(titulo, corpo, id) {
 function gerarNotaView(titulo, corpo) {
   return `<h1>${titulo}</h1><h4>${corpo}</h4>`
 }
+
 async function viewNota(id) {
-  let nota = await fetch(serverURL + "/" + id).then(dados => dados.json())
+  let nota = getNota(id)
   notasContainer.innerHTML = gerarNotaView(nota.titulo, nota.corpo)
 }
 
-feedNotasContainer()
+
+
+export { getNota , feedNotasContainer}
