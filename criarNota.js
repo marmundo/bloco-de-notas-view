@@ -23,20 +23,21 @@ function gerarFormNota(nota) {
 
 
 
-btnEditarNota.addEventListener("click", async (data) => {
+btnCriarNota.addEventListener("click", async (data) => {
   data.preventDefault()
   data = getFormJSONData(document.querySelector("#form"))
   let id = params.get('id')
-  let url = `${serverURL}/${id}`
+  data["id"] = id
+  let url = `${serverURL}`
   const response = await fetch(url, {
     headers: { Authorization: `${authToken}`, 'Content-Type': 'application/json' },
-    method: 'PUT',
+    method: 'POST',
     body: JSON.stringify(data)
   })
   if (!response.ok) {
     console.log(response.json)
   } else {
-    console.log("Nota Editada")
+    console.log("Nota Criada")
     window.location.assign(".")
   }
 })
