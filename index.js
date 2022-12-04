@@ -1,4 +1,4 @@
-import { getNota, getNotas,serverURL,authToken } from "./script.js"
+import { getNota, getNotas, deleteNota } from "./script.js"
 let notasContainer = document.querySelector('.corpo')
 let btnRemoverNota
 
@@ -8,17 +8,10 @@ async function viewNota(id) {
   notasContainer.innerHTML = gerarNotaView(nota.titulo, nota.corpo)
 }
 
-async function deleteNota(e) {
+async function deletarNota(e) {
   let id=e.currentTarget.id
-  let url = `${serverURL}/${id}`
-  const response = await fetch(url, {
-    headers: { Authorization: `${authToken}`, 'Content-Type': 'application/json' },
-    method: 'DELETE',
-  })
-  if (!response.ok) {
-    console.log(response.json)
-  } else {
-    console.log("Nota Removida")
+  let res=await deleteNota(id)
+  if(res==204){
     window.location.assign(".")
   }
 }
@@ -31,7 +24,7 @@ async function feedNotasContainer() {
     notasContainer.innerHTML += cardHTML;
   });
   btnRemoverNota = document.querySelectorAll(".btnRemoverNota")
-  btnRemoverNota.forEach(btn => btn.addEventListener("click", deleteNota))
+  btnRemoverNota.forEach(btn => btn.addEventListener("click", deletarNota))
 
 }
 

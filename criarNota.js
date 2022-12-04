@@ -1,4 +1,4 @@
-import { authToken, getFormJSONData, getNota, serverURL } from './script.js'
+import { getFormJSONData, getNota,criaNota } from './script.js'
 
 let formTitulo = document.querySelector('#titulo')
 let formCorpo = document.querySelector('#corpo')
@@ -28,16 +28,10 @@ btnCriarNota.addEventListener("click", async (data) => {
   data = getFormJSONData(document.querySelector("#form"))
   let id = params.get('id')
   data["id"] = id
-  let url = `${serverURL}`
-  const response = await fetch(url, {
-    headers: { Authorization: `${authToken}`, 'Content-Type': 'application/json' },
-    method: 'POST',
-    body: JSON.stringify(data)
-  })
-  if (!response.ok) {
-    console.log(response.json)
-  } else {
-    console.log("Nota Criada")
+  let res=await criaNota(data)
+  if(res){
     window.location.assign(".")
   }
 })
+
+
