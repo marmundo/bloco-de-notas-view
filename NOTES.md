@@ -2,7 +2,9 @@
 
 Projeto baseado em https://github.com/TomDoesTech/Testing-Express-REST-API
 
-Documentação https://gomakethings.com/unit-testing-with-vanilla-js/
+Documentação 
+- https://gomakethings.com/unit-testing-with-vanilla-js/
+- https://jestjs.io/pt-BR/docs/getting-started
 # Executar os seguintes comandos
 
 ```console
