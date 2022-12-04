@@ -2,22 +2,12 @@
 
 ```
 yarn init
-yarn add supertest jest ts-jest @types/jest @types/supertest -D
-
-yarn ts-jest config:init
-```
-# Adicionar as seguintes linhas no arquivo jest.config.js
-
-```
-testMatch: ["**/**/*.test.ts"],
-  verbose: true,
-  forceExit: true,
-  clearMocks: true,
-  resetMocks: true,
-  restoreMocks: true,
+yarn add jest  -D
 ```
 
 # Adicionar comando para test no package.json
 ```
-test:jest
+"scripts":{
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
 ```
