@@ -26,8 +26,6 @@ let formCorpo = document.querySelector('#corpo')
 btnCriarNota.addEventListener("click", async (data) => {
   data.preventDefault()
   data = getFormJSONData(document.querySelector("#form"))
-  let id = params.get('id')
-  data["id"] = id
   let url = `${serverURL}`
   const response = await fetch(url, {
     headers: { Authorization: `${authToken}`, 'Content-Type': 'application/json' },
