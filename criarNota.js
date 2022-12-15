@@ -3,23 +3,23 @@ import { authToken, getFormJSONData, getNota, serverURL } from './script.js'
 let formTitulo = document.querySelector('#titulo')
 let formCorpo = document.querySelector('#corpo')
 
-const params = new URLSearchParams(window.location.search)
+// const params = new URLSearchParams(window.location.search)
 
-if (params.has('id')) {
-  let id = params.get('id')
-  let jsonData = await getNota(id)
-  if (jsonData) {
-    gerarFormNota(jsonData)
-  } else {
-    alert("Erro ao editar dados")
-    location.href = "."
-  }
-}
+// if (params.has('id')) {
+//   let id = params.get('id')
+//   let jsonData = await getNota(id)
+//   if (jsonData) {
+//     gerarFormNota(jsonData)
+//   } else {
+//     alert("Erro ao editar dados")
+//     location.href = "."
+//   }
+// }
 
-function gerarFormNota(nota) {
-  formTitulo.value = nota.titulo
-  formCorpo.value = nota.corpo
-}
+// function gerarFormNota(nota) {
+//   formTitulo.value = nota.titulo
+//   formCorpo.value = nota.corpo
+// }
 
 
 
